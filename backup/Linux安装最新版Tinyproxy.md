@@ -5,13 +5,13 @@
 `yum erase tinyproxy`
 以下是从Github下载安装最新版的命令。
 `获取安装包
-wget https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz
+`wget https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz`
  
  解压安装包
-tar -zxvf tinyproxy-1.11.0.tar.gz
+`tar -zxvf tinyproxy-1.11.0.tar.gz`
  
 进入安装文件夹
-cd tinyproxy-1.11.0
+`cd tinyproxy-1.11.0`
  
 编译并安装
 ./configure
