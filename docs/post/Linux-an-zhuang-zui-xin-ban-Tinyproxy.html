@@ -9,10 +9,12 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="# 前言
+<meta name="description" content="
+# 前言
 之前在Linux服务器安装过tinyproxy用于ip代理，但是yum安装的话，版本最高只到1.8.3，是不支持账号密码验证的，也就是说要么限制ip，不然任何人都能连。">
 <meta property="og:title" content="Linux安装最新版Tinyproxy">
-<meta property="og:description" content="# 前言
+<meta property="og:description" content="
+# 前言
 之前在Linux服务器安装过tinyproxy用于ip代理，但是yum安装的话，版本最高只到1.8.3，是不支持账号密码验证的，也就是说要么限制ip，不然任何人都能连。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://tooltop.github.io/post/Linux-an-zhuang-zui-xin-ban-Tinyproxy.html">
@@ -75,26 +77,37 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="markdown-body" id="postBody"><h1>前言</h1>
 <p>之前在Linux服务器安装过tinyproxy用于ip代理，但是yum安装的话，版本最高只到1.8.3，是不支持账号密码验证的，也就是说要么限制ip，不然任何人都能连。而到了1.10.0就支持Basic HTTP Authentication了，但是得通过编译安装。目前Github上最新的是1.11.1，本文是安装的简要教程。</p>
 <h1>安装及配置</h1>
-<p>如果通过yum安装过1.8.3版本，得先卸载掉。<br>
-<code class="notranslate">yum erase tinyproxy</code><br>
-以下是从Github下载安装最新版的命令。<br>
-<code class="notranslate">获取安装包 </code>wget <a href="https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz%60">https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz`</a></p>
-<p>解压安装包<br>
-<code class="notranslate">tar -zxvf tinyproxy-1.11.0.tar.gz</code></p>
-<p>进入安装文件夹<br>
-<code class="notranslate">cd tinyproxy-1.11.0</code></p>
-<p>编译并安装<br>
-./configure<br>
-make<br>
-make install<code class="notranslate">安装完成后可用以下命名查看路径和版本。</code># 查看路径<br>
-which tinyproxy<br>
-/usr/local/bin/tinyproxy</p>
-<p>查看版本，最新1.11.0<br>
-tinyproxy -v<br>
-tinyproxy 1.11.0`</p>
+<p>如果通过yum安装过1.8.3版本，得先卸载掉。</p>
+<pre class="notranslate"><code class="notranslate">yum erase tinyproxy
+</code></pre>
+<p>以下是从Github下载安装最新版的命令。</p>
+<pre class="notranslate"><code class="notranslate"># 获取安装包
+wget https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz
+ 
+# 解压安装包
+tar -zxvf tinyproxy-1.11.0.tar.gz
+ 
+# 进入安装文件夹
+cd tinyproxy-1.11.0
+ 
+# 编译并安装
+./configure
+make
+make install
+</code></pre>
+<p>安装完成后可用以下命名查看路径和版本。</p>
+<pre class="notranslate"><code class="notranslate"># 查看路径
+which tinyproxy
+/usr/local/bin/tinyproxy
+ 
+# 查看版本，最新1.11.0
+tinyproxy -v 
+tinyproxy 1.11.0
+</code></pre>
 <p>修改配置文件，下面是安装后配置文件位置。</p>
-<p><code class="notranslate">vi /usr/local/etc/tinyproxy/tinyproxy.conf</code><br>
-基本的配置可以见之前那篇文章，主要说下不同。</p>
+<pre class="notranslate"><code class="notranslate">vi /usr/local/etc/tinyproxy/tinyproxy.conf
+</code></pre>
+<p>基本的配置可以见之前那篇文章，主要说下不同。</p>
 <pre class="notranslate"><code class="notranslate"># 将下面直接注释掉，允许所有ip访问
 #Allow 127.0.0.1
 #Allow ::1
