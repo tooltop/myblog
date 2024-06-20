@@ -4,7 +4,7 @@
 # 安装及配置
 如果通过yum安装过1.8.3版本，得先卸载掉。
 
-```Bash
+```
 yum erase tinyproxy
 ```
 以下是从Github下载安装最新版的命令。
@@ -39,7 +39,7 @@ tinyproxy 1.11.0
  
 修改配置文件，下面是安装后配置文件位置。
 
-```Bash
+```
 vi /usr/local/etc/tinyproxy/tinyproxy.conf
 ```
 
