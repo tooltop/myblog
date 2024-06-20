@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-color-mode="light" data-dark-theme="dark-blue" data-light-theme="dark" lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="dark" lang="zh-CN">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -18,7 +18,7 @@
 <meta property="og:url" content="https://tooltop.github.io/post/Linux-an-zhuang-zui-xin-ban-Tinyproxy.html">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/169969144?v=4">
 <title>Linux安装最新版Tinyproxy</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 </head>
 <style>
@@ -76,136 +76,124 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>之前在Linux服务器安装过tinyproxy用于ip代理，但是yum安装的话，版本最高只到1.8.3，是不支持账号密码验证的，也就是说要么限制ip，不然任何人都能连。而到了1.10.0就支持Basic HTTP Authentication了，但是得通过编译安装。目前Github上最新的是1.11.1，本文是安装的简要教程。</p>
 <h1>安装及配置</h1>
 <p>如果通过yum安装过1.8.3版本，得先卸载掉。</p>
-<pre class="notranslate"><code class="notranslate">yum erase tinyproxy
-</code></pre>
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-ent">yum</span> <span class="pl-ent">erase</span> <span class="pl-ent">tinyproxy</span></pre></div>
 <p>以下是从Github下载安装最新版的命令。</p>
-<pre class="notranslate"><code class="notranslate"># 获取安装包
-wget https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-kos">#</span> 获取安装包
+<span class="pl-c1">wget</span> <span class="pl-ent">https</span><span class="pl-kos">:</span><span class="pl-c1">/</span><span class="pl-c1">/</span><span class="pl-ent">github</span>.<span class="pl-c1">com</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">releases</span><span class="pl-c1">/</span><span class="pl-ent">download</span><span class="pl-c1">/</span>1.11.0<span class="pl-c1">/</span><span class="pl-ent">tinyproxy-1</span>.11.0.<span class="pl-c1">tar</span>.<span class="pl-c1">gz</span>
  
-# 解压安装包
-tar -zxvf tinyproxy-1.11.0.tar.gz
+<span class="pl-kos">#</span> 解压安装包
+<span class="pl-c1">tar</span> <span class="pl-ent">-zxvf</span> <span class="pl-ent">tinyproxy-1</span>.11.0.<span class="pl-c1">tar</span>.<span class="pl-c1">gz</span>
  
-# 进入安装文件夹
-cd tinyproxy-1.11.0
+<span class="pl-kos">#</span> 进入安装文件夹
+<span class="pl-c1">cd</span> <span class="pl-ent">tinyproxy-1</span>.11.0
  
-# 编译并安装
-./configure
-make
-make install
-</code></pre>
+<span class="pl-kos">#</span> 编译并安装
+.<span class="pl-c1">/</span><span class="pl-c1">configure</span>
+<span class="pl-ent">make</span>
+<span class="pl-ent">make</span> <span class="pl-ent">install</span></pre></div>
 <p>安装完成后可用以下命名查看路径和版本。</p>
-<pre class="notranslate"><code class="notranslate"># 查看路径
-which tinyproxy
-/usr/local/bin/tinyproxy
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-kos">#</span> 查看路径
+<span class="pl-c1">which</span> <span class="pl-ent">tinyproxy</span>
+<span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">bin</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>
  
-# 查看版本，最新1.11.0
-tinyproxy -v 
-tinyproxy 1.11.0
-</code></pre>
+<span class="pl-kos">#</span> 查看版本，最新1.11.0
+<span class="pl-c1">tinyproxy</span> <span class="pl-ent">-v</span> 
+<span class="pl-ent">tinyproxy</span> 1.11.0</pre></div>
 <p>修改配置文件，下面是安装后配置文件位置。</p>
-<pre class="notranslate"><code class="notranslate">vi /usr/local/etc/tinyproxy/tinyproxy.conf
-</code></pre>
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-c1">vi</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">etc</span><span class="pl-c1">/</span><span class="pl-c1">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">conf</span></pre></div>
 <p>基本的配置可以见之前那篇文章，主要说下不同。</p>
-<pre class="notranslate"><code class="notranslate"># 将下面直接注释掉，允许所有ip访问
-#Allow 127.0.0.1
-#Allow ::1
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-kos">#</span> 将下面直接注释掉，允许所有<span class="pl-c1">ip</span>访问
+<span class="pl-kos">#</span><span class="pl-c1">Allow</span> 127.0.0.1
+<span class="pl-kos">#</span><span class="pl-c1">Allow</span> ::1
  
-# 设置用户名密码
-BasicAuth username password
+<span class="pl-kos">#</span> 设置用户名密码
+<span class="pl-c1">BasicAuth</span> <span class="pl-ent">username</span> <span class="pl-ent">password</span>
  
-# 顺便将下面两行取消注释，后面有用到
-PidFile "/usr/local/var/run/tinyproxy/tinyproxy.pid"
-LogFile "/usr/local/var/log/tinyproxy/tinyproxy.log"
-</code></pre>
+<span class="pl-kos">#</span> 顺便将下面两行取消注释，后面有用到
+<span class="pl-c1">PidFile</span> <span class="pl-s">"/usr/local/var/run/tinyproxy/tinyproxy.pid"</span>
+<span class="pl-ent">LogFile</span> <span class="pl-s">"/usr/local/var/log/tinyproxy/tinyproxy.log"</span></pre></div>
 <p>保存配置文件后，使用下面的命令启动。</p>
-<pre class="notranslate"><code class="notranslate"># 指定配置文件启动（后台启动）
-tinyproxy -c /usr/local/etc/tinyproxy/tinyproxy.conf
-</code></pre>
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-kos">#</span> 指定配置文件启动（后台启动）
+<span class="pl-c1">tinyproxy</span> <span class="pl-ent">-c</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-ent">local</span><span class="pl-c1">/</span><span class="pl-ent">etc</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">conf</span></pre></div>
 <p>启动后就可以测试下</p>
-<pre class="notranslate"><code class="notranslate"># 不加验证参数不会正常返回
-curl -x http://127.0.0.1:8888 www.baidu.com
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-kos">#</span> 不加验证参数不会正常返回
+<span class="pl-c1">curl</span> <span class="pl-ent">-x</span> <span class="pl-ent">http</span><span class="pl-kos">:</span><span class="pl-c1">/</span><span class="pl-c1">/</span>127.0.0.1<span class="pl-kos">:</span>8888 <span class="pl-ent">www</span>.<span class="pl-c1">baidu</span>.<span class="pl-c1">com</span>
  
-# 正常返回
-curl -x http://username:password@127.0.0.1:8888 www.baidu.com
-</code></pre>
+<span class="pl-kos">#</span> 正常返回
+<span class="pl-c1">curl</span> <span class="pl-ent">-x</span> <span class="pl-ent">http</span><span class="pl-kos">:</span><span class="pl-c1">/</span><span class="pl-c1">/</span><span class="pl-ent">username</span><span class="pl-kos">:</span><span class="pl-ent">password</span>@127.0.0.1<span class="pl-kos">:</span>8888 <span class="pl-ent">www</span>.<span class="pl-c1">baidu</span>.<span class="pl-c1">com</span></pre></div>
 <p>以上就是简要安装与配置，但是为了方便管理服务，得添加到系统服务。</p>
 <p>##添加到系统服务</p>
-<pre class="notranslate"><code class="notranslate"># 新建tinyproxy.service文件
-vi /usr/lib/systemd/system/tinyproxy.service
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-kos">#</span> 新建<span class="pl-c1">tinyproxy</span>.<span class="pl-c1">service</span>文件
+<span class="pl-c1">vi</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">lib</span><span class="pl-c1">/</span><span class="pl-c1">systemd</span><span class="pl-c1">/</span><span class="pl-c1">system</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">service</span>
  
-# 贴入以下代码
-[Unit]
-Description=Startup script for the tinyproxy server
-After=network.target
+<span class="pl-kos">#</span> 贴入以下代码
+[<span class="pl-c1">Unit</span>]
+<span class="pl-ent">Description</span><span class="pl-c1">=</span><span class="pl-ent">Startup</span> <span class="pl-ent">script</span> <span class="pl-ent">for</span> <span class="pl-ent">the</span> <span class="pl-ent">tinyproxy</span> <span class="pl-ent">server</span>
+<span class="pl-ent">After</span><span class="pl-c1">=</span><span class="pl-ent">network</span>.<span class="pl-c1">target</span>
  
-[Service]
-Type=forking
-PIDFile=/usr/local/var/run/tinyproxy/tinyproxy.pid
-ExecStart=/usr/local/bin/tinyproxy -c /usr/local/etc/tinyproxy/tinyproxy.conf
-ExecReload=/bin/kill -HUP $MAINPID
-KillMode=process
+[<span class="pl-c1">Service</span>]
+<span class="pl-ent">Type</span><span class="pl-c1">=</span><span class="pl-ent">forking</span>
+<span class="pl-ent">PIDFile</span><span class="pl-c1">=</span><span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">var</span><span class="pl-c1">/</span><span class="pl-c1">run</span><span class="pl-c1">/</span><span class="pl-c1">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">pid</span>
+<span class="pl-ent">ExecStart</span><span class="pl-c1">=</span><span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">bin</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span> <span class="pl-ent">-c</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-ent">local</span><span class="pl-c1">/</span><span class="pl-ent">etc</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">conf</span>
+<span class="pl-ent">ExecReload</span><span class="pl-c1">=</span><span class="pl-c1">/</span><span class="pl-c1">bin</span><span class="pl-c1">/</span><span class="pl-ent">kill</span> <span class="pl-ent">-HUP</span> $<span class="pl-ent">MAINPID</span>
+<span class="pl-ent">KillMode</span><span class="pl-c1">=</span><span class="pl-ent">process</span>
  
-[Install]
-WantedBy=multi-user.target
-</code></pre>
+[<span class="pl-c1">Install</span>]
+<span class="pl-ent">WantedBy</span><span class="pl-c1">=</span><span class="pl-ent">multi-user</span>.<span class="pl-c1">target</span></pre></div>
 <p>上面的配置文件直接仿照yum安装的1.8.3版的，会出现点问题，启动不了，因为tinyproxy配置文件里的log和pid文件不存在，得先通过以下命令创建。</p>
-<pre class="notranslate"><code class="notranslate">mkdir -p /usr/local/var/run/tinyproxy
-mkdir -p /usr/local/var/log/tinyproxy
-touch /usr/local/var/log/tinyproxy/tinyproxy.log
-touch /usr/local/var/run/tinyproxy/tinyproxy.pid
-</code></pre>
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-ent">mkdir</span> <span class="pl-ent">-p</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-ent">local</span><span class="pl-c1">/</span><span class="pl-ent">var</span><span class="pl-c1">/</span><span class="pl-ent">run</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>
+<span class="pl-ent">mkdir</span> <span class="pl-ent">-p</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-ent">local</span><span class="pl-c1">/</span><span class="pl-ent">var</span><span class="pl-c1">/</span><span class="pl-ent">log</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>
+<span class="pl-ent">touch</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">var</span><span class="pl-c1">/</span><span class="pl-c1">log</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">log</span>
+<span class="pl-ent">touch</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">var</span><span class="pl-c1">/</span><span class="pl-c1">run</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">pid</span></pre></div>
 <p>然后就可以正常使用service命令了。</p>
-<pre class="notranslate"><code class="notranslate">service tinyproxy start    # 启动
-service tinyproxy stop     # 停止
-service tinyproxy restart  # 重启
-service tinyproxy status   # 状态
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-ent">service</span> <span class="pl-ent">tinyproxy</span> <span class="pl-ent">start</span>    <span class="pl-kos">#</span> 启动
+<span class="pl-c1">service</span> <span class="pl-ent">tinyproxy</span> <span class="pl-ent">stop</span>     <span class="pl-kos">#</span> 停止
+<span class="pl-c1">service</span> <span class="pl-ent">tinyproxy</span> <span class="pl-ent">restart</span>  <span class="pl-kos">#</span> 重启
+<span class="pl-c1">service</span> <span class="pl-ent">tinyproxy</span> <span class="pl-ent">status</span>   <span class="pl-kos">#</span> 状态
  
-# 将tinyproxy服务设置开机自启
-sudo systemctl enable tinyproxy
-</code></pre>
+<span class="pl-kos">#</span> 将<span class="pl-c1">tinyproxy</span>服务设置开机自启
+<span class="pl-ent">sudo</span> <span class="pl-ent">systemctl</span> <span class="pl-ent">enable</span> <span class="pl-ent">tinyproxy</span></pre></div>
 <p>最后整理下命令：</p>
-<pre class="notranslate"><code class="notranslate"># 复制以下命令，直接到修改tinyproxy.conf
-yum erase -y tinyproxy
-wget https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz
-tar -zxvf tinyproxy-1.11.0.tar.gz
-cd tinyproxy-1.11.0
-./configure
-make
-make install
-vi /usr/local/etc/tinyproxy/tinyproxy.conf
+<div class="highlight highlight-source-css"><pre class="notranslate"><span class="pl-kos">#</span> 复制以下命令，直接到修改<span class="pl-c1">tinyproxy</span>.<span class="pl-c1">conf</span>
+<span class="pl-ent">yum</span> <span class="pl-ent">erase</span> <span class="pl-ent">-y</span> <span class="pl-ent">tinyproxy</span>
+<span class="pl-ent">wget</span> <span class="pl-ent">https</span><span class="pl-kos">:</span><span class="pl-c1">/</span><span class="pl-c1">/</span><span class="pl-ent">github</span>.<span class="pl-c1">com</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">releases</span><span class="pl-c1">/</span><span class="pl-ent">download</span><span class="pl-c1">/</span>1.11.0<span class="pl-c1">/</span><span class="pl-ent">tinyproxy-1</span>.11.0.<span class="pl-c1">tar</span>.<span class="pl-c1">gz</span>
+<span class="pl-ent">tar</span> <span class="pl-ent">-zxvf</span> <span class="pl-ent">tinyproxy-1</span>.11.0.<span class="pl-c1">tar</span>.<span class="pl-c1">gz</span>
+<span class="pl-ent">cd</span> <span class="pl-ent">tinyproxy-1</span>.11.0
+.<span class="pl-c1">/</span><span class="pl-c1">configure</span>
+<span class="pl-ent">make</span>
+<span class="pl-ent">make</span> <span class="pl-ent">install</span>
+<span class="pl-ent">vi</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-ent">local</span><span class="pl-c1">/</span><span class="pl-ent">etc</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">conf</span>
  
-# 修改后，使用以下命令，到编辑tinyproxy.service
-mkdir -p /usr/local/var/run/tinyproxy
-mkdir -p /usr/local/var/log/tinyproxy
-touch /usr/local/var/log/tinyproxy/tinyproxy.log
-touch /usr/local/var/run/tinyproxy/tinyproxy.pid
-vi /usr/lib/systemd/system/tinyproxy.service
+<span class="pl-kos">#</span> 修改后，使用以下命令，到编辑<span class="pl-c1">tinyproxy</span>.<span class="pl-c1">service</span>
+<span class="pl-ent">mkdir</span> <span class="pl-ent">-p</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-ent">local</span><span class="pl-c1">/</span><span class="pl-ent">var</span><span class="pl-c1">/</span><span class="pl-ent">run</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>
+<span class="pl-ent">mkdir</span> <span class="pl-ent">-p</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-ent">local</span><span class="pl-c1">/</span><span class="pl-ent">var</span><span class="pl-c1">/</span><span class="pl-ent">log</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>
+<span class="pl-ent">touch</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">var</span><span class="pl-c1">/</span><span class="pl-c1">log</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">log</span>
+<span class="pl-ent">touch</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">var</span><span class="pl-c1">/</span><span class="pl-c1">run</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">pid</span>
+<span class="pl-ent">vi</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">lib</span><span class="pl-c1">/</span><span class="pl-ent">systemd</span><span class="pl-c1">/</span><span class="pl-ent">system</span><span class="pl-c1">/</span><span class="pl-ent">tinyproxy</span>.<span class="pl-c1">service</span>
  
-# 粘贴以下代码
-====
+<span class="pl-kos">#</span> 粘贴以下代码
+<span class="pl-c1">=</span><span class="pl-c1">=</span><span class="pl-c1">=</span><span class="pl-c1">=</span>
  
-[Unit]
-Description=Startup script for the tinyproxy server
-After=network.target
+[<span class="pl-c1">Unit</span>]
+<span class="pl-ent">Description</span><span class="pl-c1">=</span><span class="pl-c1">Startup</span> <span class="pl-c1">script</span> <span class="pl-c1">for</span> <span class="pl-c1">the</span> <span class="pl-c1">tinyproxy</span> <span class="pl-c1">server</span>
+<span class="pl-c1">After</span><span class="pl-c1">=</span><span class="pl-c1">network</span>.<span class="pl-c1">target</span>
  
-[Service]
-Type=forking
-PIDFile=/usr/local/var/run/tinyproxy/tinyproxy.pid
-ExecStart=/usr/local/bin/tinyproxy -c /usr/local/etc/tinyproxy/tinyproxy.conf
-ExecReload=/bin/kill -HUP $MAINPID
-KillMode=process
+[<span class="pl-c1">Service</span>]
+<span class="pl-ent">Type</span><span class="pl-c1">=</span><span class="pl-c1">forking</span>
+<span class="pl-c1">PIDFile</span><span class="pl-c1">=</span><span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">var</span><span class="pl-c1">/</span><span class="pl-c1">run</span><span class="pl-c1">/</span><span class="pl-c1">tinyproxy</span><span class="pl-c1">/</span><span class="pl-c1">tinyproxy</span>.<span class="pl-c1">pid</span>
+<span class="pl-ent">ExecStart</span><span class="pl-c1">=</span><span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">bin</span><span class="pl-c1">/</span><span class="pl-c1">tinyproxy</span> <span class="pl-c1">-c</span> <span class="pl-c1">/</span><span class="pl-c1">usr</span><span class="pl-c1">/</span><span class="pl-c1">local</span><span class="pl-c1">/</span><span class="pl-c1">etc</span><span class="pl-c1">/</span><span class="pl-c1">tinyproxy</span><span class="pl-c1">/</span><span class="pl-c1">tinyproxy</span>.<span class="pl-c1">conf</span>
+<span class="pl-ent">ExecReload</span><span class="pl-c1">=</span><span class="pl-c1">/</span><span class="pl-c1">bin</span><span class="pl-c1">/</span><span class="pl-c1">kill</span> <span class="pl-c1">-HUP</span> $<span class="pl-c1">MAINPID</span>
+<span class="pl-c1">KillMode</span><span class="pl-c1">=</span><span class="pl-c1">process</span>
  
-[Install]
-WantedBy=multi-user.target
+[<span class="pl-c1">Install</span>]
+<span class="pl-ent">WantedBy</span><span class="pl-c1">=</span><span class="pl-c1">multi-user</span>.<span class="pl-c1">target</span>
  
-====
+<span class="pl-c1">=</span><span class="pl-c1">=</span><span class="pl-c1">=</span><span class="pl-c1">=</span>
  
-# 保存后，再使用以下命令启动tinyproxy
-sudo systemctl enable tinyproxy
-service tinyproxy start
-service tinyproxy status
-
-</code></pre></div>
+<span class="pl-kos">#</span> 保存后，再使用以下命令启动<span class="pl-c1">tinyproxy</span>
+<span class="pl-ent">sudo</span> <span class="pl-ent">systemctl</span> <span class="pl-ent">enable</span> <span class="pl-ent">tinyproxy</span>
+<span class="pl-ent">service</span> <span class="pl-ent">tinyproxy</span> <span class="pl-ent">start</span>
+<span class="pl-ent">service</span> <span class="pl-ent">tinyproxy</span> <span class="pl-ent">status</span></pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>

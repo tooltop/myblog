@@ -4,12 +4,12 @@
 # 安装及配置
 如果通过yum安装过1.8.3版本，得先卸载掉。
 
-```
+```css
 yum erase tinyproxy
 ```
 以下是从Github下载安装最新版的命令。
 
-```
+```css
 # 获取安装包
 wget https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz
  
@@ -27,7 +27,7 @@ make install
 
 安装完成后可用以下命名查看路径和版本。
 
-```
+```css
 # 查看路径
 which tinyproxy
 /usr/local/bin/tinyproxy
@@ -39,13 +39,13 @@ tinyproxy 1.11.0
  
 修改配置文件，下面是安装后配置文件位置。
 
-```
+```css
 vi /usr/local/etc/tinyproxy/tinyproxy.conf
 ```
 
 基本的配置可以见之前那篇文章，主要说下不同。
 
-```
+```css
 # 将下面直接注释掉，允许所有ip访问
 #Allow 127.0.0.1
 #Allow ::1
@@ -59,13 +59,13 @@ LogFile "/usr/local/var/log/tinyproxy/tinyproxy.log"
 ```
 保存配置文件后，使用下面的命令启动。
 
-```
+```css
 # 指定配置文件启动（后台启动）
 tinyproxy -c /usr/local/etc/tinyproxy/tinyproxy.conf
 ```
 启动后就可以测试下
 
-```
+```css
 # 不加验证参数不会正常返回
 curl -x http://127.0.0.1:8888 www.baidu.com
  
@@ -75,7 +75,7 @@ curl -x http://username:password@127.0.0.1:8888 www.baidu.com
 以上就是简要安装与配置，但是为了方便管理服务，得添加到系统服务。
 
 ##添加到系统服务
-```
+```css
 # 新建tinyproxy.service文件
 vi /usr/lib/systemd/system/tinyproxy.service
  
@@ -96,7 +96,7 @@ WantedBy=multi-user.target
 ```
 上面的配置文件直接仿照yum安装的1.8.3版的，会出现点问题，启动不了，因为tinyproxy配置文件里的log和pid文件不存在，得先通过以下命令创建。
 
-```
+```css
 mkdir -p /usr/local/var/run/tinyproxy
 mkdir -p /usr/local/var/log/tinyproxy
 touch /usr/local/var/log/tinyproxy/tinyproxy.log
@@ -104,7 +104,7 @@ touch /usr/local/var/run/tinyproxy/tinyproxy.pid
 ```
 然后就可以正常使用service命令了。
 
-```
+```css
 service tinyproxy start    # 启动
 service tinyproxy stop     # 停止
 service tinyproxy restart  # 重启
@@ -115,7 +115,7 @@ sudo systemctl enable tinyproxy
 ```
 最后整理下命令：
 
-```
+```css
 # 复制以下命令，直接到修改tinyproxy.conf
 yum erase -y tinyproxy
 wget https://github.com/tinyproxy/tinyproxy/releases/download/1.11.0/tinyproxy-1.11.0.tar.gz
@@ -158,34 +158,5 @@ service tinyproxy start
 service tinyproxy status
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
