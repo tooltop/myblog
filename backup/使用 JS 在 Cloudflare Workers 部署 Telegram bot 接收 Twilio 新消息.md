@@ -1,4 +1,3 @@
-使用 Cloudflare Workers 部署 Telegram 机器人接收 Twilio 新消息
 
 在 Cloudflare Workers 上部署一个简单的 Telegram 机器人，该机器人可以接收从 Twilio 号码发送的短信，并将消息转发到指定的 Telegram 聊天中。
 
