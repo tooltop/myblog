@@ -77,8 +77,8 @@
 
 5. 更新 Twilio Webhook URL:
    -  复制你刚刚部署的 Cloudflare Workers 函数的 URL。
-   - 返回 Twilio  并找到你之前创建的 Webhook。
-   -  将 Webhook URL  更新为你的 Cloudflare Workers  函数的 URL。
+   - 找到你的 Twilio 电话号码并找到 Webhook 配置的地方（通常在 "Messaging" 或类似的选项下）。
+   - 创建一个新的 Webhook，将 Webhook URL  更新为你的 Cloudflare Workers  函数的 URL。
    -  保存 Webhook 配置。 
 
 ### 测试:
